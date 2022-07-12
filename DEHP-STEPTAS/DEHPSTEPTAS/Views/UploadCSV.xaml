@@ -1,0 +1,188 @@
+﻿<UserControl
+    x:Class="DEHPSTEPTAS.Views.UploadCSV"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="664.922"
+    Height="349.939">
+
+    <Grid
+        Width="632"
+        Height="390"
+        Margin="0,0,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label
+            Width="90"
+            Height="26"
+            Margin="25,8,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Upload from:"
+            Cursor="ArrowCD" />
+        <Button
+            x:Name="Analyze"
+            Width="75"
+            Height="21"
+            Margin="544,11,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding Analyze}"
+            Content="Analyze"
+            ToolTip="Only available after a CSV file has been selected with the Browse button" />
+        <TextBox
+            Width="345"
+            Height="25"
+            Margin="103,9,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            Text="{Binding UploadCSVFileNameBox}"
+            TextWrapping="NoWrap" />
+        <Button
+            x:Name="CSVBrowse"
+            Width="75"
+            Height="21"
+            Margin="460,11,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding Browse}"
+            Content="Browse" />
+        <TextBox
+            Width="594"
+            Height="219"
+            Margin="25,120,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            Text="{Binding UploadCSVTextBox}"
+            TextWrapping="Wrap" />
+        <Label
+            Width="39"
+            Height="26"
+            Margin="233,44,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="{Binding CSVFromTxt}"
+            Cursor="ArrowCD"
+            RenderTransformOrigin="1.077,0.577" />
+        <TextBox
+            Width="84"
+            Height="25"
+            Margin="276,44,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            IsEnabled="{Binding BCSVTimesMin}"
+            RenderTransformOrigin="0.818,0.446"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            Text="{Binding CSVTimesMin}"
+            TextWrapping="NoWrap" />
+        <TextBox
+            Width="90"
+            Height="25"
+            Margin="390,44,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            IsEnabled="{Binding BCSVTimesMax}"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            Text="{Binding CSVTimesMax}"
+            TextWrapping="NoWrap" />
+        <TextBox
+            Width="75"
+            Height="25"
+            Margin="544,45,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            IsEnabled="{Binding BCSVTimesInc}"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            Text="{Binding CSVTimesInc}"
+            TextWrapping="NoWrap" />
+        <Button
+            x:Name="Upload"
+            Width="75"
+            Height="21"
+            Margin="544,82,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            Command="{Binding Upload}"
+            Content="Upload"
+            ToolTip="Only available after a CSV file has been selected, successfull connection to the HUB and a StepTas file is open" />
+        <Label
+            Width="60"
+            Height="26"
+            Margin="25,44,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Range:"
+            Cursor="ArrowCD" />
+        <ComboBox
+            Width="141"
+            Margin="87,45,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding TimesSelectionNames}"
+            SelectedIndex="{Binding TimesSelectionTypeIdx}"
+            SelectedValue="{Binding TimesSelectionType}" />
+        <Label
+            Width="20"
+            Height="26"
+            Margin="365,44,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="to"
+            Cursor="ArrowCD"
+            IsEnabled="{Binding IsVisibleTo}"
+            RenderTransformOrigin="2.037,0.577" />
+        <CheckBox
+            Width="46"
+            Height="25"
+            Margin="493,45,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            Content="by"
+            IsChecked="{Binding BCheckBox}"
+            IsEnabled="{Binding IsVisibleBy}"
+            RenderTransformOrigin="2.13,0.646" />
+        <Label
+            Margin="25,74,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            Content="Finite state:" />
+        <ComboBox
+            Width="120"
+            Margin="108,79,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding FiniteStateItemsSource}"
+            RenderTransformOrigin="0.475,1.618"
+            SelectedIndex="{Binding FiniteStateSelectedIdx}"
+            SelectedValue="{Binding FiniteStateSelectedValue}" />
+    </Grid>
+</UserControl>

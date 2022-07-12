@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="DEHPSTEPTAS.Views.Dialogs.RowDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:converters="clr-namespace:DEHPCommon.Converters;assembly=DEHPCommon"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ListToElementUsageConverter x:Key="ListToElementUsageConverter" /></ResourceDictionary>
+    </UserControl.Resources>
+    <GroupBox Header="Selected Part" Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="5" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Name:"/>
+                <Label Grid.Row="1" Content="Type:"/>
+                <Label Grid.Row="2" Content="ID:"/>
+                <Label Grid.Row="3" Content="Rep. Type:"/>
+                <Label Grid.Row="4" Content="Relation Label:"/>
+                <Label Grid.Row="5" Content="Relation ID:"/>
+
+                <Label Grid.Row="0" Grid.Column="1" Margin="10,2,2,2" Content="{Binding SelectedThing.Name}"/>
+                <Label Grid.Row="1" Grid.Column="1" Margin="10,2,2,2" Content="{Binding SelectedThing.Type}"/>
+                <Label Grid.Row="2" Grid.Column="1" Margin="10,2,2,2" Content="{Binding SelectedThing.StepId}"/>
+                <Label Grid.Row="3" Grid.Column="1" Margin="10,2,2,2" Content="{Binding SelectedThing.RepresentationType}"/>
+                <Label Grid.Row="4" Grid.Column="1" Margin="10,2,2,2" Content="{Binding SelectedThing.RelationLabel}"/>
+                <Label Grid.Row="5" Grid.Column="1" Margin="10,2,2,2" Content="{Binding SelectedThing.RelationId}"/>
+            </Grid>
+            
+            <Grid Margin="5" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" Content="Option:"></Label>
+                <dxe:ComboBoxEdit Margin="10,2,2,2" Grid.Column="1" Grid.Row="0"
+                                  DisplayMember="Name" ValueMember="Name" 
+                                  AutoComplete="True" ClearSelectionOnBackspace="True" ValidateOnTextInput="False"
+                                  SelectedItem="{Binding SelectedThing.SelectedOption}"
+                                  ItemsSource="{Binding AvailableOptions}"
+                                  ToolTip="Select one Option. &#x0a;Only ElementDefinitions of selected an Option are available &#x0a;The option dependent parameter of the selected Option will be updated"
+                                  NullText="Select Option" AllowNullInput="True" NullValueButtonPlacement="EditBox" ShowNullTextForEmptyValue="True" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Element Definition:"></Label>
+                <dxe:ComboBoxEdit Margin="10,2,2,2" Grid.Column="1" Grid.Row="1"
+                                  DisplayMember="Name" ValueMember="Name" 
+                                  AutoComplete="True" ClearSelectionOnBackspace="True" ValidateOnTextInput="False"
+                                  SelectedItem="{Binding SelectedThing.SelectedElementDefinition}" 
+                                  ItemsSource="{Binding AvailableElementDefinitions}"
+                                  ToolTip="Select one ElementDefinition. &#x0a;When none ElementDefinition is selected, &#x0a;a new ElementDefinition named as the Part will be created"
+                                  NullText="Select Element Definition" AllowNullInput="True" NullValueButtonPlacement="EditBox" ShowNullTextForEmptyValue="True" />
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Update Element Usages:"></Label>
+                <dxe:ComboBoxEdit Margin="10,2,2,2" Grid.Column="1" Grid.Row="2"
+                                  DisplayMember="Name" 
+                                  AutoComplete="True" ClearSelectionOnBackspace="True" ValidateOnTextInput="False"
+                                  EditValue="{Binding SelectedThing.SelectedElementUsages, Converter={StaticResource ListToElementUsageConverter}}"
+                                  ItemsSource="{Binding AvailableElementUsages}"
+                                  ToolTip="Select one or more ElementUsage. &#x0a;When selecting ElementUsages of one ElementDefinition, &#x0a;All the parameterOverrides of the selected Parameter will be updated"
+                                  NullText="Select Element Usages" AllowNullInput="True" NullValueButtonPlacement="EditBox" ShowNullTextForEmptyValue="True">
+                    <dxe:ComboBoxEdit.StyleSettings>
+                        <dxe:CheckedTokenComboBoxStyleSettings NewTokenPosition="Far" AllowEditTokens="False"/>
+                    </dxe:ComboBoxEdit.StyleSettings>
+                </dxe:ComboBoxEdit>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Actual Finite State:" />
+                <dxe:ComboBoxEdit Margin="10,2,2,2" Grid.Column="1" Grid.Row="3"
+                                  DisplayMember="Name" ValueMember="Name"
+                                  AutoComplete="True" ClearSelectionOnBackspace="True" ValidateOnTextInput="False" ApplyItemTemplateToSelectedItem="True"
+                                  SelectedItem="{Binding SelectedThing.SelectedActualFiniteState}" 
+                                  ItemsSource="{Binding AvailableActualFiniteStates}"
+                                  ToolTip="Select the ActualFiniteState when the parameter is State Dependent"
+                                  NullText="Select Finite State" AllowNullInput="True" ShowNullTextForEmptyValue="True" NullValueButtonPlacement="EditBox">
+                </dxe:ComboBoxEdit>
+                
+                <!-- NOTE: ParameterType is NOT REQUIRED, we construct a Step 3D Geometric parameter -->
+            </Grid>
+        </Grid>
+    </GroupBox>
+</UserControl>

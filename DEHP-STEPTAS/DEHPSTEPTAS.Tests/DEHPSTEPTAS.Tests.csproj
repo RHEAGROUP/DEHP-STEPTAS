@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="nunit" Version="3.12.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+		<PackageReference Include="Moq" Version="4.14.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DEHPSTEPTAS\DEHPSTEPTAS.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<Reference Include="steptasinterface">
+			<HintPath>..\..\..\StepTasInterface\src\steptasinterface.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Web" />
+		<Reference Include="System.Windows.Forms" />
+		<Reference Include="WindowsFormsIntegration" />
+	</ItemGroup>
+	
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy /Y &quot;$(SolutionDir)\..\..\StepTasInterface\build\steptasinterface.dll&quot; &quot;$(ProjectDir)\$(OutDir)&quot;" />
+	</Target>
+	
+
+</Project>
