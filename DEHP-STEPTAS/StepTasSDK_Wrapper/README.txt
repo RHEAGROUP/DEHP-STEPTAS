@@ -38,10 +38,12 @@ STEP 2 : Build steptasint.dll
 -----------------------------
 
 - Edit DEHP_STEPTAS_REP\StepTasSDK_Wrapper\StepTasInterface\CMakeLists.txt file
-    and change STEPTAS_SDK_PAH accordingly to STEP 1
+    and change STEPTAS_SDK_PATH accordingly to STEP 1
+        Note:  !!! use / instead of \ to specify the path in CMakeLists.txt
 
 - Edit DEHP_STEPTAS_REP\StepTasSDK_Wrapper\StepTasInterface\src\CMakeLists.txt
     and change STEPTAS_SDK_LIB_PATH accordingly to STEP 1
+        Note:  !!! use / instead of \ to specify the path in CMakeLists.txt	
 
 - Open a "x64 Native Tools Command Prompt for VS 2019" in DEHP_STEPTAS_REP\StepTasSDK_Wrapper\StepTasInterface\src
 
